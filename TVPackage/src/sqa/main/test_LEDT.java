@@ -12,34 +12,42 @@ class test_LEDT {
 
 	@ParameterizedTest
 	@CsvSource({
-	"STANDARD, true, true, true, 300",
-	"STANDARD, true, true, false, 350",
-	"STANDARD, true, false, true, 200",
-	"STANDARD, true, false, false, 250",
-	"STANDARD, false, true, true, 200",
-	"STANDARD, false, true, false, 250",
-	"STANDARD, false, false, true, 100",
-	"STANDARD, false, false, false, 150",
+	"true, false, false, true, true, true, 300",
+	"true, false, false, true, true, false, 350",
+	"true, false, false, true, false, true, 200",
+	"true, false, false, true, false, false, 250",
+	"true, false, false, false, true, true, 200",
+	"true, false, false, false, true, false, 250",
+	"true, false, false, false, false, true, 100",
+	"true, false, false, false, false, false, 150",
 	
-	"PREMIUM, true, true, true, 500",
-	"PREMIUM, true, true, false, 550",
-	"PREMIUM, true, false, true, 400",
-	"PREMIUM, true, false, false, 450",
-	"PREMIUM, false, true, true, 400",
-	"PREMIUM, false, true, false, 450",
-	"PREMIUM, false, false, true, 300",
-	"PREMIUM, false, false, false, 350",
+	"false, true, false, true, true, true, 500",
+	"false, true, false, true, true, false, 550",
+	"false, true, false, true, false, true, 400",
+	"false, true, false, true, false, false, 450",
+	"false, true, false, false, true, true, 400",
+	"false, true, false, false, true, false, 450",
+	"false, true, false, false, false, true, 300",
+	"false, true, false, false, false, false, 350",
 	
-	"FAMILY, true, true, true, 600",
-	"FAMILY, true, true, false, 650",
-	"FAMILY, true, false, true, 500",
-	"FAMILY, true, false, false, 550",
-	"FAMILY, false, true, true, 500",
-	"FAMILY, false, true, false, 550",
-	"FAMILY, false, false, true, 400",
-	"FAMILY, false, false, false, 450"
+	"false, false, true, true, true, true, 600",
+	"false, false, true, true, true, false, 650",
+	"false, false, true, true, false, true, 500",
+	"false, false, true, true, false, false, 550",
+	"false, false, true, false, true, true, 500",
+	"false, false, true, false, true, false, 550",
+	"false, false, true, false, false, true, 400",
+	"false, false, true, false, false, false, 450"
 	})
-	void testWithCsvSource(TVPackage selectedPackage, boolean offline_watching, boolean live_service, boolean discount, double totalPrice) {
+	void testWithCsvSource(boolean standard, boolean premium, boolean family, boolean offline_watching, boolean live_service, boolean discount, double totalPrice) {
+		TVPackage selectedPackage = null;
+		if (standard == true) {
+			selectedPackage = TVPackage.STANDARD;
+		}else if (premium == true) {
+			selectedPackage = TVPackage.PREMIUM;
+		}else if (family == true) {
+			selectedPackage = TVPackage.FAMILY;
+		}
 		test = new TVPlan(offline_watching, live_service, discount);
 		assertEquals(totalPrice, test.pricePerMonth(selectedPackage));
 	}
