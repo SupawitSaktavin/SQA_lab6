@@ -37,10 +37,17 @@ class test_LEDT {
 	"false, false, true, false, true, true, 500",
 	"false, false, true, false, true, false, 550",
 	"false, false, true, false, false, true, 400",
-	"false, false, true, false, false, false, 450"
+	"false, false, true, false, false, false, 450",
+	
+	"true, true, true, false, false, false, 0",
+	"true, true, false, false, false, false, 0",
+	"true, false, true, false, false, false, 0",
+	"false, true, true, false, false, false, 0",
+	"false, false, false, false, false, false, 0"
 	})
-	void testWithCsvSource(boolean standard, boolean premium, boolean family, boolean offline_watching, boolean live_service, boolean discount, double totalPrice) {
-		TVPackage selectedPackage = null;
+	void test_Limited_Entry_Decision_Table(boolean standard, boolean premium, boolean family, boolean offline_watching, boolean live_service, boolean discount, double totalPrice) {
+	    TVPackage selectedPackage = null;
+	    
 		if (standard == true) {
 			selectedPackage = TVPackage.STANDARD;
 		}else if (premium == true) {
@@ -48,6 +55,7 @@ class test_LEDT {
 		}else if (family == true) {
 			selectedPackage = TVPackage.FAMILY;
 		}
+		
 		test = new TVPlan(offline_watching, live_service, discount);
 		assertEquals(totalPrice, test.pricePerMonth(selectedPackage));
 	}
