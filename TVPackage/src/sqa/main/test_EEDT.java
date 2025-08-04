@@ -41,7 +41,7 @@ class test_EEDT {
 	
 	"M0, A0, false, 0",
 	"M4, A3, true, 0",
-	"M5, A1, true, 0",
+	"M5, A1, true, 0"
 	})
 	void test_Extended_Entry_Decision_Table(String mainPackage, String additionalPackage, boolean discount, double totalPrice) {
 		boolean offline_watching = false;
